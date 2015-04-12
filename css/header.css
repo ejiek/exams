@@ -1,0 +1,11 @@
+.login_bord {
+	    border: solid 1px black; 
+		float: right;
+		margin-right: 3%;
+    }
+    
+    .logout_bord {
+
+		float: right;
+		margin-right: 3%;
+    }
