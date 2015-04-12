@@ -1,5 +1,5 @@
 <?php
-include_once "connect_server.php";
+    include_once "connect_server.php";
 ?>
 <html>
     <head>
@@ -20,28 +20,31 @@ include_once "connect_server.php";
         }
         
         else{
-        
-            echo "Hi, ";
+            echo "Hi, " . $_SESSION["Name"] . "\r\n";
+            echo '<a href="logout.php" class="logout_bord">Log Out</a>'. "\r\n";
+        }
+
+        if($_SESSION["status"] == 2){
             
             // Соединение с сервером БД
         	mysql_connect(servername, server_username, server_password) or die (mysql_error ());
 
         	// Выбор БД
-        	mysql_select_db(db) or die(mysql_error());
-
-        	// SQL-запрос
-        	$strSQL = "SELECT Name FROM " . user_dbt . " WHERE id = '" . $_SESSION["user_id"] . "'";
-        	$rs = mysql_query($strSQL);
-            $row = mysql_fetch_array($rs);
-    
-            // Проверка наличия такого логина + пароля
-            if ($row != 0){
-                echo $row['Name'];
+          	mysql_select_db(db) or die(mysql_error());
+          	
+            echo "<br/><div>Your Exams:<br/> \r\n<ul>\r\n";
+            $strSQL = "SELECT * FROM " . exam . " WHERE author_id = '" . $_SESSION["user_id"] . "';";
+	        $rs = mysql_query($strSQL);
+            while($row = mysql_fetch_array($rs)){
+                $strExamName = $row['Name'];
+                $strExamID = $row['id'];
+                $strExam_IsOpen = $row['is_open'];
+                $strExamComment = $row['comment'];
+                echo $strExamName . "<br/>\r\n";
             }
-            
-            
-            echo '<a href="logout.php" class="logout_bord">Log Out</a>';
-        }
+            echo "</ul> \r\n <a href='new_exam/new_exam.php'>create new exam</a></div>\r\n";
+        }		
+		
 		?>
     </body>
 </html>

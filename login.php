@@ -13,7 +13,6 @@ include_once "connect_server.php";
 	// SQL-запрос
 	$strSQL = "SELECT user_id, login, password FROM " . login_dbt . " WHERE login = '$username'";
 	$rs = mysql_query($strSQL);
-    echo $rs;
     $row = mysql_fetch_array($rs);
     
     // Проверка наличия такого логина + пароля
@@ -21,6 +20,12 @@ include_once "connect_server.php";
         if ($row['password']==$_POST["password"]){
             session_start();
             $_SESSION["user_id"] = $row['user_id'];
+            
+            $strSQL = "SELECT Name, status FROM " . user_dbt . " WHERE id = '" . $row['user_id'] . "'";
+            $rs = mysql_query($strSQL);
+            $row = mysql_fetch_array($rs);
+            $_SESSION["status"] = $row['status'];
+            $_SESSION["Name"] = $row['Name'];
             echo "session created";
         }
         else{
