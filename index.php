@@ -16,7 +16,7 @@ include_once "connect_server.php";
     <body>
         <form class="bord" method="post" action="login.php" autocomplete="off">
 		<p><input type="text" name="username" placeholder="Username"></p>
-		<input type="text" name="password" placeholder="Password">
+		<input type="password" name="password" placeholder="Password">
 		<div><input type="submit" value="Login">
 		<input type="submit" value="Sign Up"></div></form></li>
     </body>
