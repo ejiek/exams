@@ -33,7 +33,7 @@
           	mysql_select_db(db) or die(mysql_error());
           	
             echo "<br/><div>Your Exams:<br/> \r\n<ul>\r\n";
-            $strSQL = "SELECT * FROM " . exam . " WHERE author_id = '" . $_SESSION["user_id"] . "';";
+            $strSQL = "SELECT * FROM " . exam_dbt . " WHERE author_id = '" . $_SESSION["user_id"] . "';";
 	        $rs = mysql_query($strSQL);
             while($row = mysql_fetch_array($rs)){
                 $strExamName = $row['Name'];
