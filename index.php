@@ -40,7 +40,10 @@
                 $strExamID = $row['id'];
                 $strExam_IsOpen = $row['is_open'];
                 $strExamComment = $row['comment'];
-                echo $strExamName . "<br/>\r\n";
+                
+                echo '<form method="post" action="login.php">' . "\r\n";
+                echo '<input type="hidden" name="author_id" value="'. $_SESSION["user_id"] .'">' . "\r\n";
+                echo '<div><input type="submit" value="' . $strExamName . '"></div></form>' . "\r\n";
             }
             echo "</ul> \r\n <a href='new_exam/new_exam.php'>create new exam</a></div>\r\n";
         }		
