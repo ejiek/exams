@@ -21,7 +21,7 @@ include_once "connect_server.php";
             session_start();
             $_SESSION["user_id"] = $row['user_id'];
             
-            $strSQL = "SELECT Name, status FROM " . user_dbt . " WHERE id = '" . $row['user_id'] . "'";
+            $strSQL = "SELECT Name, status FROM " . user_dbt . " WHERE id = '" . $row['user_id'] . "';";
             $rs = mysql_query($strSQL);
             $row = mysql_fetch_array($rs);
             $_SESSION["status"] = $row['status'];

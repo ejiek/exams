@@ -33,7 +33,7 @@
           	mysql_select_db(db) or die(mysql_error());
           	
             echo "<br/><div>Your Exams:<br/> \r\n<ul>\r\n";
-            $strSQL = "SELECT * FROM " . exam_dbt . " WHERE author_id = '" . $_SESSION["user_id"] . "';";
+            $strSQL = "SELECT * FROM " . exam_dbt . " WHERE author_id = '" . $_SESSION["user_id"] . "'";
 	        $rs = mysql_query($strSQL);
             while($row = mysql_fetch_array($rs)){
                 $strExamName = $row['Name'];
@@ -41,8 +41,8 @@
                 $strExam_IsOpen = $row['is_open'];
                 $strExamComment = $row['comment'];
                 
-                echo '<form method="post" action="login.php">' . "\r\n";
-                echo '<input type="hidden" name="author_id" value="'. $_SESSION["user_id"] .'">' . "\r\n";
+                echo '<form method="post" action="show_exam/show.php">' . "\r\n";
+                echo '<input type="hidden" name="exam_id" value="' . $strExamID . '">' . "\r\n";
                 echo '<div><input type="submit" value="' . $strExamName . '"></div></form>' . "\r\n";
             }
             echo "</ul> \r\n <a href='new_exam/new_exam.php'>create new exam</a></div>\r\n";
