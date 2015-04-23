@@ -20,7 +20,7 @@ include_once "../connect_server.php";
                 $strExamID = $row['id'];
                 $strExam_IsOpen = $row['is_open'];
                 $strExamComment = $row['comment'];
-                echo 'Exam: ' . $strExamName . '</br>' . "\r\n";
+                echo 'Exam: ' . $strExamName . '<br>' . "\r\n";
             }
             
             $strSQL = "SELECT * FROM " . question_dbt . " WHERE exam_id = '" . $_POST["exam_id"] . "'";
