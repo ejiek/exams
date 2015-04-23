@@ -8,7 +8,12 @@
 	mysql_select_db(db) or die(mysql_error());
         
     	$strSQL = "INSERT INTO `" . db . "`.`" . answer_dbt . "` (`id`,`question_id`,`content`,`is_correct`) ";
-	    $strSQL = $strSQL .  "VALUES (NULL, '"  . $_POST["question_id"] . "', '"  . $_POST["content"] . "', '"  . $_POST["is_correct"] . "')";
+    	
+    	if($_POST["is_correct"] == 'on'){
+    	    $is_correct = 1;
+    	}
+    	else{$is_correct = 0;}
+	    $strSQL = $strSQL .  "VALUES (NULL, '"  . $_POST["question_id"] . "', '"  . $_POST["content"] . "', '"  . $is_correct . "')";
 	    echo $strSQL;
 	    $rs = mysql_query($strSQL);
     }
