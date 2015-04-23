@@ -1,3 +1,8 @@
+<html>
+    <head>
+        
+    </head>
+    <body>
 <?php
 session_start();
 include_once "../connect_server.php";
@@ -22,21 +27,33 @@ include_once "../connect_server.php";
 	        $rs = mysql_query($strSQL);
 	        echo "<ul>\r\n";
             while($row = mysql_fetch_array($rs)){
-                $strQustContent = $row['Content'];
+                $strQustContent = $row['content'];
                 $strQuestID = $row['id'];
                 echo '<li>' . $strQustContent . '</li>' . "\r\n";
                 
                 $strAnsSQL = "SELECT * FROM " . answer_dbt . " WHERE question_id = '" . $strQuestID . "'";
-	            $rsAns = mysql_query($strSQL);
+	            $rsAns = mysql_query($strAnsSQL);
 	            echo "<ul>\r\n";
 	            while($rowAns = mysql_fetch_array($rsAns)){
 	                $strAnsContent = $rowAns['content'];
 	                $strAnsIsCor = $rowAns['is_correct'];
 	                echo '<li>' . $strAnsContent . '</li>' . "\r\n";
 	            }
-                echo "<ul>\r\n";
+                echo "</ul>\r\n";
+                echo "\r\n" . '<form method="post" action="../new_exam/new_answer.php" autocomplete="off">';
+    	    	echo "\r\n" . '<p><input type="text" name="content" placeholder="Content"></p>';
+    	    	echo "\r\n" . '<input type="checkbox" name="is_correct">Is it correct';
+        		echo "\r\n" . '<input type="hidden" name="question_id" value="'. $strQuestID .'">';
+    	    	echo "\r\n" . '<div><input type="submit" value="Add Answer"></div></form>';
+
             }
-            echo "<ul>\r\n";
+            echo "</ul>\r\n";
+            echo "\r\n" . '<form method="post" action="../new_exam/new_question.php" autocomplete="off">';
+    		echo "\r\n" . '<p><input type="text" name="content" placeholder="Content"></p>';
+    		echo "\r\n" . '<input type="hidden" name="exam_id" value="'. $strExamID .'">';
+    		echo "\r\n" . '<div><input type="submit" value="Add Question"></div></form>';
 
 
 ?>
+</body>
+</html>
