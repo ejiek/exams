@@ -5,6 +5,7 @@
     <body>
 <?php
 session_start();
+if($_SESSION["status"] == 2){
 include_once "../connect_server.php";
             
              // Соединение с сервером БД
@@ -52,7 +53,10 @@ include_once "../connect_server.php";
     		echo "\r\n" . '<input type="hidden" name="exam_id" value="'. $strExamID .'">';
     		echo "\r\n" . '<div><input type="submit" value="Add Question"></div></form></li>';
             echo "</ul>\r\n";
-
+}
+else{
+    echo "You are not allowed to be here =\ ";
+}
 
 ?>
 </body>
