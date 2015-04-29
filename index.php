@@ -22,31 +22,60 @@
         else{
             echo "Hi, " . $_SESSION["Name"] . "\r\n";
             echo '<a href="logout.php" class="logout_bord">Log Out</a>'. "\r\n";
-        }
-
-        if($_SESSION["status"] == 2){
-            
-            // Соединение с сервером БД
-        	mysql_connect(servername, server_username, server_password) or die (mysql_error ());
-
-        	// Выбор БД
-          	mysql_select_db(db) or die(mysql_error());
-          	
-            echo "<br/><div>Your Exams:<br/> \r\n<ul>\r\n";
-            $strSQL = "SELECT * FROM " . exam_dbt . " WHERE author_id = '" . $_SESSION["user_id"] . "'";
-	        $rs = mysql_query($strSQL);
-            while($row = mysql_fetch_array($rs)){
-                $strExamName = $row['Name'];
-                $strExamID = $row['id'];
-                $strExam_IsOpen = $row['is_open'];
-                $strExamComment = $row['comment'];
+        
+            if($_SESSION["status"] == 2){
                 
-                echo '<form method="post" action="show_exam/show.php">' . "\r\n";
-                echo '<input type="hidden" name="exam_id" value="' . $strExamID . '">' . "\r\n";
-                echo '<div><input type="submit" value="' . $strExamName . '"></div></form>' . "\r\n";
+                // Соединение с сервером БД
+            	mysql_connect(servername, server_username, server_password) or die (mysql_error ());
+    
+            	// Выбор БД
+              	mysql_select_db(db) or die(mysql_error());
+              	
+                echo "<br/><div>Your Exams:<br/> \r\n<ul>\r\n";
+                $strSQL = "SELECT * FROM " . exam_dbt . " WHERE author_id = '" . $_SESSION["user_id"] . "'";
+    	        $rs = mysql_query($strSQL);
+                while($row = mysql_fetch_array($rs)){
+                    $strExamName = $row['Name'];
+                    $strExamID = $row['id'];
+                    $strExam_IsOpen = $row['is_open'];
+                    $strExamComment = $row['comment'];
+                    
+                    echo '<form method="post" action="show_exam/show.php">' . "\r\n";
+                    echo '<input type="hidden" name="exam_id" value="' . $strExamID . '">' . "\r\n";
+                    echo '<div><input type="submit" value="' . $strExamName . '"></div></form>' . "\r\n";
+                }
+                echo "</ul> \r\n <a href='new_exam/new_exam.php'>create new exam</a></div>\r\n";
+            }	
+            else{
+                // Соединение с сервером БД
+            	mysql_connect(servername, server_username, server_password) or die (mysql_error ());
+    
+            	// Выбор БД
+              	mysql_select_db(db) or die(mysql_error());
+              	
+                echo "<br/><div>Available exams:<br/> \r\n<ul>\r\n";
+                $strSQL = "SELECT * FROM " . exam_dbt . " WHERE is_open = '1'";
+    	        $rs = mysql_query($strSQL);
+                while($row = mysql_fetch_array($rs)){
+                    $strExamName = $row['Name'];
+                    $strExamID = $row['id'];
+                    $strExam_IsOpen = $row['is_open'];
+                    $strExamComment = $row['comment'];
+                    $strExamAuthor = $row['author_id'];
+                    
+                    $strSQLAu = "SELECT * FROM " . user_dbt . " WHERE id = " . $strExamAuthor . "";
+    	            $rsAu = mysql_query($strSQLAu);
+                    while($rowAu = mysql_fetch_array($rsAu)){
+                        $strAuthorName = $rowAu['Name'];
+                    }
+                    
+                    echo '<form method="post" action="show_exam/show.php">' . "\r\n";
+                    echo '<input type="hidden" name="exam_id" value="' . $strExamID . '">' . "\r\n";
+                    echo '<div><input type="submit" value="' . $strExamName . ' (' . $strAuthorName . ')"></div></form>' . "\r\n";
+                }
+                echo "</ul> \r\n";
             }
-            echo "</ul> \r\n <a href='new_exam/new_exam.php'>create new exam</a></div>\r\n";
-        }		
+        }
 		
 		?>
     </body>
