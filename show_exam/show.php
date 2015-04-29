@@ -39,19 +39,19 @@ include_once "../connect_server.php";
 	                $strAnsIsCor = $rowAns['is_correct'];
 	                echo '<li>' . $strAnsContent . '</li>' . "\r\n";
 	            }
-                echo "</ul>\r\n";
-                echo "\r\n" . '<form method="post" action="../new_exam/new_answer.php" autocomplete="off">';
+                echo "\r\n" . '<li><form method="post" action="../new_exam/new_answer.php" autocomplete="off">';
     	    	echo "\r\n" . '<p><input type="text" name="content" placeholder="Content"></p>';
     	    	echo "\r\n" . '<input type="checkbox" name="is_correct">Is it correct';
         		echo "\r\n" . '<input type="hidden" name="question_id" value="'. $strQuestID .'">';
-    	    	echo "\r\n" . '<div><input type="submit" value="Add Answer"></div></form>';
+    	    	echo "\r\n" . '<div><input type="submit" value="Add Answer"></div></form></li>';
+                echo "</ul>\r\n";
 
             }
-            echo "</ul>\r\n";
-            echo "\r\n" . '<form method="post" action="../new_exam/new_question.php" autocomplete="off">';
+            echo "\r\n" . '<li><form method="post" action="../new_exam/new_question.php" autocomplete="off">';
     		echo "\r\n" . '<p><input type="text" name="content" placeholder="Content"></p>';
     		echo "\r\n" . '<input type="hidden" name="exam_id" value="'. $strExamID .'">';
-    		echo "\r\n" . '<div><input type="submit" value="Add Question"></div></form>';
+    		echo "\r\n" . '<div><input type="submit" value="Add Question"></div></form></li>';
+            echo "</ul>\r\n";
 
 
 ?>
