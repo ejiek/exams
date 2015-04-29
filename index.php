@@ -69,7 +69,7 @@
                         $strAuthorName = $rowAu['Name'];
                     }
                     
-                    echo '<form method="post" action="show_exam/show.php">' . "\r\n";
+                    echo '<form method="post" action="/take_exam/questions.php">' . "\r\n";
                     echo '<input type="hidden" name="exam_id" value="' . $strExamID . '">' . "\r\n";
                     echo '<div><input type="submit" value="' . $strExamName . ' (' . $strAuthorName . ')"></div></form>' . "\r\n";
                 }
