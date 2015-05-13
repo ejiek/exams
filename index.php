@@ -40,9 +40,12 @@
                     $strExam_IsOpen = $row['is_open'];
                     $strExamComment = $row['comment'];
                     
-                    echo '<form method="post" action="show_exam/show.php">' . "\r\n";
+                    echo '<div><form method="post" action="show_exam/show.php" style="display:inline;">' . "\r\n";
                     echo '<input type="hidden" name="exam_id" value="' . $strExamID . '">' . "\r\n";
-                    echo '<div><input type="submit" value="' . $strExamName . '"></div></form>' . "\r\n";
+                    echo '<input type="submit" value="' . $strExamName . '"></form>' . "\r\n\r\n";
+                    echo '<form method="post" action="/new_exam/delete.php" style="display:inline;">' . "\r\n";
+                    echo '<input type="hidden" name="exam_id" value="' . $strExamID . '">' . "\r\n";
+                    echo '<input type="submit" value="delete it"></form></div>' . "\r\n";
                 }
                 echo "</ul> \r\n <a href='new_exam/new_exam.php'>create new exam</a></div>\r\n";
             }	

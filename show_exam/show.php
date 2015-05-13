@@ -30,15 +30,22 @@ include_once "../connect_server.php";
             while($row = mysql_fetch_array($rs)){
                 $strQustContent = $row['content'];
                 $strQuestID = $row['id'];
-                echo '<li>' . $strQustContent . '</li>' . "\r\n";
+                echo '<li>' . $strQustContent . "\r\n";
+                    echo '<form method="post" action="/new_exam/delete_answer.php" style="display:inline;">' . "\r\n";
+                    echo '<input type="hidden" name="question_id" value="' . $strQuestID . '">' . "\r\n";
+                    echo '<input type="submit" value="delete it"></form></li>' . "\r\n";
                 
                 $strAnsSQL = "SELECT * FROM " . answer_dbt . " WHERE question_id = '" . $strQuestID . "'";
 	            $rsAns = mysql_query($strAnsSQL);
 	            echo "<ul>\r\n";
 	            while($rowAns = mysql_fetch_array($rsAns)){
+	                $strAnsID = $rowAns['id'];
 	                $strAnsContent = $rowAns['content'];
 	                $strAnsIsCor = $rowAns['is_correct'];
-	                echo '<li>' . $strAnsContent . '</li>' . "\r\n";
+	                echo '<li>' . $strAnsContent . "\r\n";
+                    echo '<form method="post" action="/new_exam/delete_answer.php" style="display:inline;">' . "\r\n";
+                    echo '<input type="hidden" name="answer_id" value="' . $strAnsID . '">' . "\r\n";
+                    echo '<input type="submit" value="delete it"></form></li>' . "\r\n";
 	            }
                 echo "\r\n" . '<li><form method="post" action="../new_exam/new_answer.php" autocomplete="off">';
     	    	echo "\r\n" . '<p><input type="text" name="content" placeholder="Content"></p>';
