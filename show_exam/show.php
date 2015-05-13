@@ -14,7 +14,15 @@ include_once "../connect_server.php";
         	// Выбор БД
           	mysql_select_db(db) or die(mysql_error());
 
-            $strSQL = "SELECT * FROM " . exam_dbt . " WHERE id = '" . $_POST["exam_id"] . "'";
+if($_POST["exam_id"] != 0){
+    $editExam_id = $_SESSION["editExam_id"] = $_POST["exam_id"];
+}
+else{
+    $editExam_id = $_SESSION["editExam_id"];
+}
+
+
+            $strSQL = "SELECT * FROM " . exam_dbt . " WHERE id = '" . $editExam_id . "'";
 	        $rs = mysql_query($strSQL);
             while($row = mysql_fetch_array($rs)){
                 $strExamName = $row['Name'];
@@ -24,14 +32,14 @@ include_once "../connect_server.php";
                 echo 'Exam: ' . $strExamName . '<br>' . "\r\n";
             }
             
-            $strSQL = "SELECT * FROM " . question_dbt . " WHERE exam_id = '" . $_POST["exam_id"] . "'";
+            $strSQL = "SELECT * FROM " . question_dbt . " WHERE exam_id = '" . $editExam_id . "'";
 	        $rs = mysql_query($strSQL);
 	        echo "<ul>\r\n";
             while($row = mysql_fetch_array($rs)){
                 $strQustContent = $row['content'];
                 $strQuestID = $row['id'];
                 echo '<li>' . $strQustContent . "\r\n";
-                    echo '<form method="post" action="/new_exam/delete_answer.php" style="display:inline;">' . "\r\n";
+                    echo '<form method="post" action="/new_exam/delete_question.php" style="display:inline;">' . "\r\n";
                     echo '<input type="hidden" name="question_id" value="' . $strQuestID . '">' . "\r\n";
                     echo '<input type="submit" value="delete it"></form></li>' . "\r\n";
                 
