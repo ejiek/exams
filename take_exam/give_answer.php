@@ -34,15 +34,12 @@ else{
         }
     //**Looking for answeres for the same question
     $is_q_already_a = 0;
-    $strSQL = "SELECT * FROM " . user_answer_dbt . " WHERE user_exam_id = '" . $_SESSION["uExam_id"] . "'";
-	$rs = mysql_query($strSQL);
+    $strSQL = "SELECT * FROM " . user_answer_dbt . " WHERE user_exam_id = '" . $_SESSION["uExam_id"] . "' JOIN " . answer_dbt . " ON " . user_answer_dbt . ".answer_id=" . answer_dbt . ".id";
+    $rs = mysql_query($strSQL);
     while($row = mysql_fetch_array($rs)){
-        $QstrSQL = "SELECT * FROM " . answer_dbt . " WHERE id = '" . $row["answer_id"] . "'";
-    	$Qrs = mysql_query($QstrSQL);
-        while($Qrow = mysql_fetch_array($Qrs)){
-            if($Qrow["id"] == $QuestID){$is_q_already_a = $is_q_already_a + 1;}
-        }
+        if($row["id"] == $QuestID){$is_q_already_a = $is_q_already_a + 1;}
     }
+
 
     if($is_q_already_a == 0){
     	$strSQL = "INSERT INTO `" . db . "`.`" . user_answer_dbt . "` (`user_exam_id`,`answer_id`) ";
