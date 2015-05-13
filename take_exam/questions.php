@@ -34,7 +34,7 @@ else{
     }
 }
 
-            $strSQL = "SELECT * FROM " . exam_dbt . " WHERE id = '" . $_POST["exam_id"] . "'";
+            $strSQL = "SELECT * FROM " . exam_dbt . " WHERE id = '" . $ExamID . "'";
 	        $rs = mysql_query($strSQL);
             while($row = mysql_fetch_array($rs)){
                 $strExamName = $row['Name'];
@@ -44,7 +44,7 @@ else{
                 echo 'Exam: ' . $strExamName . '<br>' . "\r\n";
             }
             
-            $strSQL = "SELECT * FROM " . question_dbt . " WHERE exam_id = '" . $_POST["exam_id"] . "'";
+            $strSQL = "SELECT * FROM " . question_dbt . " WHERE exam_id = '" . $ExamID . "'";
 	        $rs = mysql_query($strSQL);
 	        echo "<ul>\r\n";
             while($row = mysql_fetch_array($rs)){

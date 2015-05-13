@@ -14,7 +14,8 @@
     	}
     	else{$is_correct = 0;}
 	    $strSQL = $strSQL .  "VALUES (NULL, '"  . $_POST["question_id"] . "', '"  . $_POST["content"] . "', '"  . $is_correct . "')";
-	    echo $strSQL;
+	    include_once $_SERVER['DOCUMENT_ROOT'] . '/redirect.php';
+        Redirect('/show_exam/show.php');
 	    $rs = mysql_query($strSQL);
     }
         

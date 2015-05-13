@@ -1,8 +1,3 @@
-<html>
-    <head>
-        
-    </head>
-    <body>
 <?php
 session_start();
 include_once $_SERVER['DOCUMENT_ROOT'] . '/connect_server.php';
@@ -22,7 +17,7 @@ else{
     while($row = mysql_fetch_array($rs)){
         $ExamID = $row["exam_id"];
     }
-}
+
 
     //*** Answered check
     //**getting question_id for current answer
@@ -45,11 +40,11 @@ else{
     	$strSQL = "INSERT INTO `" . db . "`.`" . user_answer_dbt . "` (`user_exam_id`,`answer_id`) ";
 	    $strSQL = $strSQL .  "VALUES ('"  . $_SESSION["uExam_id"] . "', '"  . $AnsID . "')";
 	    $rs = mysql_query($strSQL);
+	    include_once $_SERVER['DOCUMENT_ROOT'] . '/redirect.php';
+        Redirect('/take_exam/questions.php');
     }
     else{
         echo "You've already answered";
     }
-
+}
 ?>
-</body>
-</html>

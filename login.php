@@ -26,7 +26,8 @@ include_once "connect_server.php";
             $row = mysql_fetch_array($rs);
             $_SESSION["status"] = $row['status'];
             $_SESSION["Name"] = $row['Name'];
-            echo "session created";
+            include_once $_SERVER['DOCUMENT_ROOT'] . '/redirect.php';
+            Redirect('/index.php');
         }
         else{
             echo "Error! Wrong Password</br>";

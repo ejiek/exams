@@ -18,6 +18,8 @@
 	    $rs = mysql_query($strSQL);
 	    
 	    $strSQL = "SELECT * FROM " . exam_dbt . " WHERE Name = '"  . $_POST["name"] . "', author_id = '"  . $_POST["author_id"] . "', is_open = '"  . $is_open . "', comment = '"  . $_POST["comment"] . "')";
+	    include_once $_SERVER['DOCUMENT_ROOT'] . '/redirect.php';
+        Redirect('/index.php');
     }
         
     else{

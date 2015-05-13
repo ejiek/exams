@@ -9,7 +9,8 @@
         
     	$strSQL = "INSERT INTO `" . db . "`.`" . question_dbt . "` (`id`,`exam_id`,`content`) ";
 	    $strSQL = $strSQL .  "VALUES (NULL, '"  . $_POST["exam_id"] . "', '"  . $_POST["content"] . "')";
-	    echo $strSQL;
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/redirect.php';
+        Redirect('/show_exam/show.php');
 	    $rs = mysql_query($strSQL);
     }
         
